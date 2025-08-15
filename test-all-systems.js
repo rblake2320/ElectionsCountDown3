@@ -162,7 +162,7 @@ async function testAPIs() {
         userId: 1,
         interactionType: 'test',
         electionId: 21,
-        sessionId: 'test-session'
+        sessionId: '550e8400-e29b-41d4-a716-446655440000'
       })
     });
     if (!analytics.ok) throw new Error('Analytics API failed');
