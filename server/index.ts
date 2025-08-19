@@ -72,8 +72,12 @@ app.get('/api/stats', (req, res) => {
   });
 });
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
+// Development: Proxy to Vite dev server
+if (process.env.NODE_ENV === 'development') {
+  // In development, Vite handles the frontend
+  console.log('🔧 Development mode: Frontend served by Vite at http://localhost:5173');
+} else {
+  // Production: Serve static files
   const publicPath = join(__dirname, '../dist/public');
   app.use(express.static(publicPath));
   
@@ -101,6 +105,10 @@ app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`🎨 Frontend: http://localhost:5173`);
+    console.log(`⚡ Run 'npm run dev' in a separate terminal to start Vite`);
+  }
 });
 
 export default app;
